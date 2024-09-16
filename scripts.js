@@ -1,3 +1,7 @@
+/**
+ * ================== Part 1 (continuation of Feeling Loopy)
+ */
+
 // ================== PART 3 Feeling Loopy
 // Loop through the characters of a given CSV string.
 // Store each “cell” of data in a variable.
@@ -22,3 +26,16 @@ for (let row of rows) {
     let cells = row.split(','); // Split each row into an array of cells
     console.log(...cells); // Use Spread operator, log each cell
 }
+
+/**
+ * ================== Part 2 Expanding Functionality
+ */
+
+// Declare a variable that stores the number of columns in each row of data within the CSV.
+// Instead of hard-coding four columns per row,
+// expand your code to accept any number of columns.
+// This should be calculated dynamically based on the first row of data.
+
+// determine number of columns from step 1
+
+let numColumns =
