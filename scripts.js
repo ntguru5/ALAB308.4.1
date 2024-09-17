@@ -24,7 +24,7 @@ let rows = csvData.split('\n');
 // Step 2: Loop through each row and split by commas to get cells
 for (let row of rows) {
     let cells = row.split(','); // Split each row into an array of cells
-    console.log(...cells); // Use Spread operator, log each cell
+    // console.log(...cells); // Use Spread operator, log each cell
 }
 
 /**
@@ -36,6 +36,14 @@ for (let row of rows) {
 // expand your code to accept any number of columns.
 // This should be calculated dynamically based on the first row of data.
 
-// determine number of columns from step 1
+// determine number of columns from step 1 dynamically
+// Step 2: Dynamically determine the number of columns from the first row
 
-let numColumns =
+let header = rows[0].split(','); // Split the first row (header) by commas
+let numColumns = header.length;  // Get the number of columns
+console.log(`Number of columns: ${numColumns}`);
+
+for (let row of rows) {
+    let cells = row.split(','); // Split each row into an array of cells
+    console.log(...cells); // Use Spread operator, log each cell
+}
