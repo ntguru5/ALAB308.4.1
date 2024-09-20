@@ -98,6 +98,7 @@ Insert the following object at index 1:
 Add the following object to the end of the array:
 { id: "7", name: "Bilbo", occupation: "None", age: "111" }
  */
+// I re-used some of my previous variables
 
 // Remove last element (Bill)
 newArray.pop();
@@ -127,19 +128,23 @@ console.log(`Average age: ${averageAge}`);
  * ================== Part 5: Full Circle
  * transform the final set of data back into CSV format
  */
+// I re-used some of my previous variables
 
 // reassign previous header variable and grab the headers from the keys of the first object
 headers = Object.keys(newArray[0]);
+
+// capitalize first letter of each header
+headers = headers.map(header => header.charAt(0).toUpperCase() + header.slice(1));
 
 // reassign csvData variable starting with the headers
 csvData = headers.join(',') + '\n'; // join headers with commas and add newline
 
 // loop through each object and extract values to form new rows
 for (let row of newArray) {
-    let values = headers.map(header => row[header]); //get values in same order as headers
-    csvData += values.join(',') + '\n'; //join values with commas and add newline
+    let values = headers.map(header => row[header.toLowerCase()]); // Match the lowercased keys in the object
+    csvData += values.join(',') + '\n'; // Join values with commas and add a newline
 }
 
-// trim whitespace and any new lines and log results
+// trim string and log results
 csvData = csvData.trim();
 console.log(csvData);
