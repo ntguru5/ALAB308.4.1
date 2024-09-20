@@ -121,3 +121,25 @@ let averageAge = totalAge / newArray.length; // Calculate the average
 // log updated array and average age
 console.log(newArray);
 console.log(`Average age: ${averageAge}`);
+
+
+/**
+ * ================== Part 5: Full Circle
+ * transform the final set of data back into CSV format
+ */
+
+// reassign previous header variable and grab the headers from the keys of the first object
+headers = Object.keys(newArray[0]);
+
+// reassign csvData variable starting with the headers
+csvData = headers.join(',') + '\n'; // join headers with commas and add newline
+
+// loop through each object and extract values to form new rows
+for (let row of newArray) {
+    let values = headers.map(header => row[header]); //get values in same order as headers
+    csvData += values.join(',') + '\n'; //join values with commas and add newline
+}
+
+// trim whitespace and any new lines and log results
+csvData = csvData.trim();
+console.log(csvData);
