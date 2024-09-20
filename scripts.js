@@ -38,24 +38,24 @@
 
 // determine number of columns from step 1 dynamically
 // Dynamically determine the number of columns from the first row
-let csvData = "ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26";
+// let csvData = "ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26";
 // let csvData = "Index,Mass (kg),Spring 1 (m),Spring 2 (m)\n1,0.00,0.050,0.050\n2,0.49,0.066,0.066\n3,0.98,0.087,0.080\n4,1.47,0.116,0.108\n5,1.96,0.142,0.138\n6,2.45,0.166,0.158\n7,2.94,0.193,0.174\n8,3.43,0.204,0.192\n9,3.92,0.226,0.205\n10,4.41,0.238,0.232";
-let rows = csvData.split('\n');
+// let rows = csvData.split('\n');
 
-let header = rows[0].split(','); // Split the first row (header) by commas
-let numColumns = header.length;  // Get the number of columns
-console.log(`Number of columns: ${numColumns}`); // log the number of columns
+// let header = rows[0].split(','); // Split the first row (header) by commas
+// let numColumns = header.length;  // Get the number of columns
+// console.log(`Number of columns: ${numColumns}`); // log the number of columns
 
-// // Create a parent array to store all rows (two-dimensional array)
-let tableData = [];
+// Create a parent array to store all rows (two-dimensional array)
+// let tableData = [];
 
-// // Loop through each row and split by commas to get cells, then store the result
-for (let row of rows) {
-    let cells = row.split(','); // Split each row into an array of cells
-    tableData.push(cells);      // Push the row array into the parent array
-}
+// Loop through each row and split by commas to get cells, then store the result
+// for (let row of rows) {
+//     let cells = row.split(','); // Split each row into an array of cells
+//     tableData.push(cells);      // Push the row array into the parent array
+// }
 
-console.log(tableData);
+// console.log(tableData);
 
 /**
  * ================== Part 3 Transforming Data
@@ -65,27 +65,59 @@ Store these objects in an array, in the order that they were originally listed.
 Since the heading for each column will be stored in the object keys, you do not need to create an object for the heading row itself.
  */
 // let csvData = "Index,Mass (kg),Spring 1 (m),Spring 2 (m)\n1,0.00,0.050,0.050\n2,0.49,0.066,0.066\n3,0.98,0.087,0.080\n4,1.47,0.116,0.108\n5,1.96,0.142,0.138\n6,2.45,0.166,0.158\n7,2.94,0.193,0.174\n8,3.43,0.204,0.192\n9,3.92,0.226,0.205\n10,4.41,0.238,0.232";
-// let csvData = "ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26";
+let csvData = "ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26";
 
 // // // Split CSV data into rows based on newline
-// let rows = csvData.split('\n');
+let rows = csvData.split('\n');
 
 // // // Split the first row by comma, convert them to lowercase
-// let headers = rows[0].split(',').map(header => header.toLowerCase());
+let headers = rows[0].split(',').map(header => header.toLowerCase());
 
 // // // initialize an array to store the results
-// let newArray = [];
+let newArray = [];
 
 // // // loop through remaining rows, create objects using headers, and store them
-// for (let i = 1; i < rows.length; i++) {
-//     let cells = rows[i].split(',');
-//     let rowObject = {}; // initialize empty object for the current row
+for (let i = 1; i < rows.length; i++) {
+    let cells = rows[i].split(',');
+    let rowObject = {}; // initialize empty object for the current row
 
 // //     // map each header to its corresponding cell value
-//     for (let j = 0; j < headers.length; j++) {
-//         rowObject[headers[j]] = cells[j];
-//     }
-//     newArray.push(rowObject);
-// }
+    for (let j = 0; j < headers.length; j++) {
+        rowObject[headers[j]] = cells[j];
+    }
+    newArray.push(rowObject);
+}
 
-// console.log(newArray);
+console.log(newArray);
+
+/**
+* ================== Part 4: Sorting and Manipulating Data
+Remove the last element from the sorted array.
+Insert the following object at index 1:
+{ id: "48", name: "Barry", occupation: "Runner", age: "25" }
+Add the following object to the end of the array:
+{ id: "7", name: "Bilbo", occupation: "None", age: "111" }
+ */
+
+// Remove last element (Bill)
+newArray.pop();
+
+// Insert the new object (Barry) at index 1
+let barry = { id: "48", name: "Barry", occupation: "Runner", age: "25" };
+newArray.splice(1, 0, barry);
+
+// Add the new object (Bilbo) to the end of the array
+let bilbo = { id: "7", name: "Bilbo", occupation: "None", age: "111" };
+newArray.push(bilbo);
+
+// Calculate the average age of the group
+let totalAge = 0;
+for (let person of newArray) {
+  totalAge += parseInt(person.age); // Sum all ages
+}
+
+let averageAge = totalAge / newArray.length; // Calculate the average
+
+// log updated array and average age
+console.log(newArray);
+console.log(`Average age: ${averageAge}`);
